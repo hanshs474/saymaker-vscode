@@ -1,0 +1,41 @@
+{
+  "name": "saymaker",
+  "displayName": "SayMaker: AI Video and Image Generator",
+  "description": "Generate images and video clips into your workspace, edit an image or animate it, from the command palette. Veo 3.1, Kling 3.0, Seedance 2.0, Nano Banana 2 and more on one SayMaker API key.",
+  "version": "0.1.0",
+  "publisher": "saymaker",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://saymaker.ai/?utm_source=vscode&utm_medium=extension",
+  "repository": { "type": "git", "url": "https://github.com/hanshs474/saymaker-vscode" },
+  "bugs": { "url": "https://github.com/hanshs474/saymaker-vscode/issues" },
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other", "Visualization"],
+  "keywords": ["ai video generator", "text to video", "image to video", "ai image generator", "image editing", "veo", "kling", "seedance", "nano banana"],
+  "main": "./extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "commands": [
+      { "command": "saymaker.generateImage", "title": "Generate Image", "category": "SayMaker" },
+      { "command": "saymaker.generateVideo", "title": "Generate Video", "category": "SayMaker" },
+      { "command": "saymaker.editImage", "title": "Edit Image with AI", "category": "SayMaker" },
+      { "command": "saymaker.animateImage", "title": "Animate Image into a Video", "category": "SayMaker" },
+      { "command": "saymaker.setApiKey", "title": "Set API Key", "category": "SayMaker" }
+    ],
+    "menus": {
+      "explorer/context": [
+        { "command": "saymaker.editImage", "when": "resourceExtname =~ /\\.(png|jpe?g|webp)$/i", "group": "saymaker" },
+        { "command": "saymaker.animateImage", "when": "resourceExtname =~ /\\.(png|jpe?g|webp)$/i", "group": "saymaker" }
+      ]
+    },
+    "configuration": {
+      "title": "SayMaker",
+      "properties": {
+        "saymaker.outputFolder": { "type": "string", "default": "assets", "description": "Workspace folder where generated images and clips are saved." },
+        "saymaker.imageModel": { "type": "string", "default": "", "description": "Image model id, e.g. nano-banana-2, gpt-image-2-5-flare, seedream-5-pro. Empty uses saymaker-image-v1 (or nano-banana-2-lite for edits)." },
+        "saymaker.videoModel": { "type": "string", "default": "", "description": "Video model id, e.g. veo-3-1, kling-3-0, seedance-2. Empty uses minimax-h3-fast, which runs on a free account." }
+      }
+    }
+  },
+  "scripts": { "test": "node test/client.test.js" }
+}
